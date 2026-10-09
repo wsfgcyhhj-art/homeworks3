@@ -1,19 +1,36 @@
 import sqlite3
-from darabase import queries
 
-path_db = "database/sqlite.db"
 
 def init_db():
-    conn = sqlite3.connect(path_db)
-    cursor = conn.cursor()
-    cursor.execute(queries.products_table)
-    print("DB connect.")
+    conn = sqlite3.connect("cafe.db")
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS products (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            description TEXT,
+            price TEXT
+        )
+    """)
     conn.commit()
     conn.close()
 
-def add_product_db(name, description, price, photo):
-    conn = sqlite3.connect(path_db)
-    cursor = conn.cursor()
-    cursor.execute(queries.insert_product, (name, description, price, photo))
+
+def add_product(name, description, price):
+    conn = sqlite3.connect("cafe.db")
+    cur = conn.cursor()
+    cur.execute(
+        "INSERT INTO products (name, description, price) VALUES (?, ?, ?)",
+        (name, description, price),
+    )
     conn.commit()
     conn.close()
+
+
+def get_all_products():
+    conn = sqlite3.connect("cafe.db")
+    cur = conn.cursor()
+    cur.execute("SELECT name, description, price FROM products")
+    rows = cur.fetchall()
+    conn.close()
+    return rows
