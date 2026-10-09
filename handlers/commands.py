@@ -39,3 +39,9 @@ async def show_catalog(message: Message):
 @router_commands.message(F.text.lower() == "группа")
 async def cmd_group(message: Message):
     await message.answer("Твоя группа 70-2")
+
+router_commands.message(F.sticker)
+async def get_sticker_id(message: Message):
+    await message.answer(f"ID 'стикера: {message.sticker.file_id}")
+
+
