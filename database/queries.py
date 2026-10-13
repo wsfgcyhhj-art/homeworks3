@@ -1,6 +1,20 @@
+survey_table = """
+CREATE TABLE IF NOT EXISTS trial_lessons (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    age INTEGER NOT NULL,
+    phone TEXT NOT NULL
+)
+"""
+
+insert_survey = """
+INSERT INTO trial_lessons (name, age, phone)
+VALUES (?, ?, ?)
+"""
+
 products_table = """
 CREATE TABLE IF NOT EXISTS products (
-    id integer PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     description TEXT,
     price INTEGER,
