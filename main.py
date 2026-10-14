@@ -7,7 +7,7 @@ from handlers import commands, echo, fsm, quiz
 
 
 async def on_startup():
-    main_db.create_table()
+    await main_db.create_table()
 
 
 async def main():
